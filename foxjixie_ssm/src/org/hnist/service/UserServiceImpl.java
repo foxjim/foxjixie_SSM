@@ -5,8 +5,11 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
+import net.sf.json.JSONArray;
+
 import org.hnist.mapper.CollegeMapper;
 import org.hnist.mapper.UserMapper;
+import org.hnist.model.College;
 import org.hnist.model.User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -137,6 +140,25 @@ public class UserServiceImpl implements UserService {
 			e.printStackTrace();
 		}
 
+		return "error";
+	}
+
+	//查找所有的学院-ajax给注册添加下拉框
+	@Override
+	public String findAllCollege() {
+		try{
+			List<College> colleges=collegeMapper.findAllCollege();
+			if(colleges.size()<=0){
+				return "0";
+			}else{
+				JSONArray jsonArray = JSONArray.fromObject(colleges);
+				return jsonArray.toString();
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
 		return "error";
 	}
 

@@ -90,5 +90,14 @@ public class UserController {
 		 return userService.existByEmail(email);
 	 }
 	 
+	 /**
+	  * 查找所有的学院-ajax(注册账号用)
+	  * @return
+	  */
+	 @RequestMapping(value="findAllCollege",produces = "text/plain;charset=utf-8")
+	 @ResponseBody
+	 public String findAllCollege(){
+		 return userService.findAllCollege();
+	 }
 	 
 }

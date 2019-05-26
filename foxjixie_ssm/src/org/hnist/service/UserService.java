@@ -57,4 +57,10 @@ public interface UserService {
 	 * @return
 	 */
 	public String existByEmail(String email);
+	
+	/**
+	 * 查找所有的学院-ajax给注册添加下拉框
+	 * @return
+	 */
+	public String findAllCollege();
 }
