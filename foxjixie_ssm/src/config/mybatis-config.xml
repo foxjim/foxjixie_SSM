@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <typeAliases>
+        <typeAlias alias="User" type="org.hnist.model.User"/>
+        <typeAlias alias="College" type="org.hnist.model.College"/>
+    </typeAliases>
+    <mappers>
+        <mapper resource="org/hnist/mapper/UserMapper.xml" />
+        <mapper resource="org/hnist/mapper/CollegeMapper.xml" />
+    </mappers>
+</configuration>
