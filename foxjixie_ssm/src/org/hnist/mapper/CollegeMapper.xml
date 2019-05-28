@@ -39,7 +39,7 @@
 	</delete>
 	
 	<!-- 查找所有的学院 -->
-	<select id="findAllCollege">
+	<select id="findAllCollege" resultType="College">
 		select * from College order by collegeId
 	</select>
 	

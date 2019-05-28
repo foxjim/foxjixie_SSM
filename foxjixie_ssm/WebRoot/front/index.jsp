@@ -80,7 +80,7 @@
 <!-- start main-->
 		<div class="main_bg">
 			<div class="business">
-				技术领域 TECHNOlOGY
+				${msg }技术领域 TECHNOlOGY 
 			</div>
 			<div class="wrap w_72">
 				<div class="grids_1_of_3">

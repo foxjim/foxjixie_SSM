@@ -3,8 +3,42 @@
 <html>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta http-equiv="Pragma"  content="no-cache" > 
+<meta http-equiv="Cache-Control"   content="no-cache" > 
+<meta http-equiv="Expires"   content="0" > 
+
 <title>注册-计协会员</title>
 <link rel="stylesheet" href="./front/CSS/mr-01.css" type="text/css">
+<script type="text/javascript" src="./js/register.js"></script>
+
+<style type="text/css">
+
+	
+	.register_select{
+		    display: block;
+		    float: left;
+    		width: 74%;
+   			height: 43px;
+    		padding: 6px 12px;
+    		font-size: 12px;
+    		line-height: 1.666667;
+    		color: #555555;
+   		 	background-color: #ffffff;
+    		background-image: none;
+    		border: 1px solid #cccccc;
+    		border-radius: 0;
+		
+	
+	
+	}
+	
+	.star{
+		font-size:10px; 
+		color:red;
+	}
+</style>
+
+
 </head>
 
 <body style="text-align: center;background-image: url(./front/img/login_bases10.jpg); background-repeat: no-repeat;background-size: cover;">
@@ -22,7 +56,7 @@
 							<p style="color:red;">${loginError}</p>
 						</div>
 						<!-- 会员注册表单 -->
-						<form id="member-registration" action="registerUser"
+						<form id="member-registration" action="./register.do"  autocomplete="off"
 							onsubmit="return regis();" method="post" class="form-horizontal">
 							<fieldset>
 								<div class="form-group">
@@ -32,21 +66,22 @@
 									</div>
 									<div class="col-sm-8">
 										<!-- 学号文本框 -->
-										<input type="text" name="userNo" id="userCount" value=""
-											class="required" size="38" required="required"
-											aria-required="true"><span class="star">&nbsp;*</span>
+										<input type="text" name="userNo" id="userNo" class="required"
+											size="38" required="required" oninput="ensureUserNo()" readonly="readonly">
+											<span id="userNo_show" class="star">&nbsp;*</span>
 									</div>
 								</div>
 								<div class="form-group">
 									<div class="col-sm-4 control-label">
-										<label id="username-lbl" for="username" class="required">
-											用户名 ：</label>
+										<label id="username-lbl" for="userCount" class="required">
+											账号：</label>
 									</div>
 									<div class="col-sm-8">
 										<!-- 账户文本框 -->
-										<input type="text" name="userCount" id="userCount" value=""
-											class="required" size="38" required="required"
-											aria-required="true"><span class="star">&nbsp;*</span>
+										<input type="text" name="userCount" id="userCount" value=""readonly="readonly"
+											class="required" size="38" required="required" oninput="ensureUserCount()">
+										
+										<span id="userCount_show" class="star">&nbsp;*</span>
 									</div>
 								</div>
 								<div class="form-group">
@@ -56,12 +91,13 @@
 									</div>
 									<div class="col-sm-8">
 										<!-- 真实姓名文本框 -->
-										<input type="text" name="userName" id="jform_username"
-											value="" class="validate-username required" size="38"
-											required="required" aria-required="true"><span
-											class="star">&nbsp;*</span>
+										<input type="text" name="userName" id="userName" oninput="ensureUserName()" 
+											class="validate-username required" size="38" required="required"   readonly="readonly">
+										
+										<span id="userName_show" class="star">&nbsp;*</span>
 									</div>
 								</div>
+								
 								<div class="form-group">
 									<div class="col-sm-4 control-label">
 										<label id="password-lbl" for="password" class="required">
@@ -69,12 +105,13 @@
 									</div>
 									<div class="col-sm-8">
 										<!-- 学院文本框 -->
-										<input type="text" name="userCollege" id="jform_username"
-											value="" class="validate-username required" size="38"
-											required="required" aria-required="true"><span
-											class="star">&nbsp;*</span>
+										<select name="userCollege" id="userCollege" class="register_select" required="required" oninput="ensureCollege()">
+											<option selected disabled value="">----请选择学院----</option>
+										</select>
+										<span id="userCollege_show"  class="star">&nbsp;*</span>
 									</div>
 								</div>
+								
 								<div class="form-group">
 									<div class="col-sm-4 control-label">
 										<label id="password-lbl" for="password" class="required">
@@ -82,10 +119,10 @@
 									</div>
 									<div class="col-sm-8">
 										<!-- 密码文本框 -->
-										<input type="password" name="userPassword" id="pwd" value=""
-											autocomplete="off" class="validate-password required"
-											size="38" maxlength="99" required="required"
-											aria-required="true"><span class="star">&nbsp;*</span>
+										<input type="password" name="userPassword" id="userPassword" oninput="ensurePassword()"
+											autocomplete="off" class="validate-password required" readonly="readonly"
+											size="38" maxlength="99" required="required">
+											<span id="pwd1_show" class="star">&nbsp;*</span>
 									</div>
 								</div>
 								<div class="form-group">
@@ -95,23 +132,43 @@
 									</div>
 									<div class="col-sm-8">
 										<!-- 确认密码文本框 -->
-										<input type="password" name="pwd2" id="pwd2" value=""
-											autocomplete="off" class="validate-password required"
-											size="38" maxlength="99" required="required"
-											aria-required="true"><span class="star">&nbsp;*</span>
+										<input type="password" name="pwd2" id="pwd2" oninput="ensurePwd2()"
+											autocomplete="off" class="validate-password required" readonly="readonly"
+											size="38" maxlength="99" required="required" >
+										<span  id="pwd2_show"  class="star">&nbsp;*</span>
 									</div>
 								</div>
+								
 								<div class="form-group">
 									<div class="col-sm-4 control-label">
 										<label id="password-lbl" for="password" class="required">
 											联系电话 ：</label>
 									</div>
-									<div class="col-sm-8" style="clear: none;">
+									<div class="col-sm-8" >
 										<!-- 联系电话文本框 -->
-										<input type="text" name="telPhone" class="validate-email " id="tel"
+										<input type="text" name="telPhone" class="validate-password required " id="tel" readonly="readonly" oninput="ensureTel()"
 											value="" size="38" aria-required="true">
+										
+											<span  id="tel_show"  class="star">&nbsp;*</span>
 									</div>
 								</div>
+								
+								<div class="form-group">
+									<div class="col-sm-4 control-label">
+										<label id="password-lbl" for="password" class="required">
+											年级 ：</label>
+									</div>
+									<div class="col-sm-8">
+										<select name="userGrades" id="userGrades" class="register_select" oninput="ensureUserGrades()">
+											<option selected disabled value="">----请选择年级----</option>
+									
+										</select>
+										<span id="userGrades_show"  class="star">&nbsp;*</span>
+									
+									</div>
+								</div>
+								
+								
 								<div class="form-group">
 									<div class="col-sm-4 control-label">
 										<label id="password-lbl" for="password" class="required">
@@ -119,8 +176,10 @@
 									</div>
 									<div class="col-sm-8" style="clear: none;">
 										<!-- 邮箱文本框 -->
-										<input type="email" name="email" class="validate-email"
-											id="jform_email2" value="" size="38" aria-required="true">
+										<input type="email" name="email" class="validate-password required " readonly="readonly" oninput="ensureEmail()"
+											id="email" value="" size="38" aria-required="true">
+											
+										<span  id="email_show"  class="star">&nbsp;*</span>
 									</div>
 								</div>
 								<div class="form-group">
@@ -128,11 +187,14 @@
 										计协会员<a href="./front/tiaokuan.jsp" target="_blank"  style="color: #0885B1;">《使用条款》</a>
 									</div>
 								</div>
+								
+								
 								<div class="form-group">
 									<div class="col-sm-offset-4 col-sm-8">
 										<button type="submit" class="btn btn-primary login">同意协议并注册</button>
 									</div>
 								</div>
+								
 								&nbsp;
 								<div class="form-group" style="margin: 20px;">
 									<label
@@ -148,24 +210,63 @@
 	</div>
 	<!-- //主体内容 -->
 </body>
-<!-- 验证输入的注册信息是否合法 -->
+
 <script src="./front/js2/jquery.1.3.2.js" type="text/javascript"></script>
-<script>
-	function regis() {
-		/* ----------- 验证输入的联系电话是否合法 --------------------- */
-		if (isNaN($('#tel').val())) {
-			alert("联系电话请输入数字");
-			return false;
+
+<!-- 显示年级和学院 -->
+<script type="text/javascript">
+	
+	//从后台获取所有学院显示在select下拉列表
+	(function earnUserCollege(){
+		var userCollege=document.getElementById('userCollege');
+		
+		$.ajax({
+			url:'./findAllCollege.do',
+			type:'POST',
+			success:function(result){
+				var colleges=strToJson(result);
+				for(var i in colleges){
+					var option=userCollege.appendChild(document.createElement('option'));
+					option.value=colleges[i].collegeNo;
+					option.innerHTML=colleges[i].collegeName;
+				}
+			},
+			error:function(){
+				window.confirm('服务器错误,请刷新或稍后重试');
+			}
+		})
+	})();
+	
+	//给年级下拉列表赋值
+	(function earnUserGrades(){
+		var date=new Date();
+		var grades=date.getFullYear()%100;
+		//console.log(grades+'grades');
+		var userGrades=document.getElementById('userGrades');
+		
+		for(var i=0;i<5;i++){
+			var option=userGrades.appendChild(document.createElement('option'));
+			//console.log(grades-4+i+'zz')
+			option.value=grades-4+i;
+			option.innerHTML=grades-4+i;
 		}
-		/* ----------- 验证两次输入的密码是否一致 --------------------- */
-		var pwd = document.getElementById("pwd").value;
-		var pwd2 = document.getElementById("pwd2").value;
-		if (pwd !== pwd2) {
-			alert('密码前后不一致！');
-			return false;
+		
+	})();
+	
+	//json字符转换
+	function strToJson(str){ 
+		var json = eval('(' + str + ')'); 
+		return json; 
+} 
+	
+	//去除readonly
+	setTimeout(function removeReadonly(){
+		var input=document.getElementsByTagName('input');
+		for(let i=0;i<input.length;i++){
+			input[i].removeAttribute("readonly")
 		}
-		return true;
-	}
+	},1000)
+
 </script>
-<!-- //验证输入的信息是否合法 -->
+<!-- 显示年级和学院 -->
 </html>

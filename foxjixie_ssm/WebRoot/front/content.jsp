@@ -44,7 +44,7 @@
 					<%
 									
 								
-									if(userCount==null){
+									if(user==null){
 					%>
 					<p style="clear:both;height:100px;width:100%;"></p>
 					<p style="font-size:30px;width:100%;margin:0 auto; "><a>您好，先</a><a href="../login.jsp">注册登录</a></p>
@@ -52,7 +52,7 @@
 								<%
 									}else{
 								%>
-				<div class="content_main">
+				<div class="content_main" style="min-height:300px;">
 				<br>
 				<c:forEach var="snt" items="${sclists}">
 					<br>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- org.hnist.mapper.TeacherMapper对应的接口 -->
+<mapper namespace="org.hnist.mapper.ImagesMapper">
+	
+	<!-- 查找最大的图片序号 -->
+	<select id="findMaxImageId" resultType="Integer">
+	
+	</select>
+
+	<!-- 将导入的图片路径插入数据库的方法 -->
+	<select id="insertImages" parameterType="Images" >
+	
+	</select>
+</mapper>

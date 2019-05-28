@@ -21,7 +21,12 @@
 						<!-- 会员登录表单 -->
 						<form action="./login.do" method="post" class="form-horizontal">
 							<fieldset>
-							&nbsp;<p style="color:red;">${msg}</p>
+							<%
+								String getMessage=request.getParameter("msg");
+								if(getMessage!=null){%>
+									&nbsp;<p style="color:red;"><%=getMessage %></p>
+								<% }%>
+							&nbsp;<p style="color:red;">${msg} </p>
 								<div class="form-group">
 								
 									<div class="col-sm-4 control-label">

@@ -23,6 +23,12 @@ public interface UserMapper {
 	public List<User> login(User user);
 	
 	/**
+	 * 查找最大的学生序号 - Max(userId)
+	 * @return
+	 */
+	public Integer findMaxUserId();
+	
+	/**
 	 * 插入数据的方法
 	 * @param user
 	 * @return

@@ -1,4 +1,5 @@
 ﻿<%@ page language="java" import="java.util.*" pageEncoding="UTF-8" %>
+<%@ page import="org.hnist.model.User" %>
 <!--头部-->
 		<div class="header_bg">
 			<div class="wrap">
@@ -8,15 +9,15 @@
 					</div>
 					<div style="float:right">
 								<%
-									String userCount=(String)session.getAttribute("userCount");
+									User user=(User)session.getAttribute("user");
 								
-									if(userCount==null){
+									if(user==null){
 								%>
 									<a>您好，先</a><a href="../login.jsp">注册登录</a>
 								<%
 									}else{
 								%>
-								<a>您好！<%=userCount%></a>
+								<a>您好！<%=user.getUserCount()%></a>
 								
 								<%
 									}

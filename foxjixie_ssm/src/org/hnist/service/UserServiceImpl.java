@@ -25,9 +25,9 @@ import org.springframework.ui.Model;
 public class UserServiceImpl implements UserService {
 
 	@Resource
-	public UserMapper userMapper;
+	private UserMapper userMapper;
 	@Resource
-	public CollegeMapper collegeMapper;
+	private CollegeMapper collegeMapper;
 
 	// 普通账户登陆的login
 	@Override
@@ -38,11 +38,10 @@ public class UserServiceImpl implements UserService {
 			if (users != null && users.size() > 0) {
 
 				session.setAttribute("user", users.get(0));
-				// System.out.println("登陆成功");
+				
 				return "/index";
 			}
 			model.addAttribute("msg", "账号或密码错误");
-			// System.out.println("账号或密码错误");
 			return "/login";
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -55,10 +54,17 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public String register(User user, Model model, HttpSession session) {
 		try {
-			// 注册成功 切换到主页面
+			Integer maxUserId=userMapper.findMaxUserId();
+			
+			if(maxUserId==null){
+				maxUserId=0;
+			}
+			user.setUserId(maxUserId+1);	
+			
+			// 注册成功 切换到登录界面
 			if (userMapper.InsertUser(user)) {
-				session.setAttribute("user", user);
-				return "/index";
+				model.addAttribute("msg", "注册成功,可以登录了");
+				return "redirect:/login.jsp";
 			} else {
 				model.addAttribute("msg", "数据出错,请稍后重试");
 				return "/register";
@@ -74,10 +80,12 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public String existByUserNo(String userNo) {
 		try {
-			// 当此账号不存在时 返回0 存在则返回1 否则返回error
-			if (userMapper.findByUserNo(userNo).size() < 0) {
+			//System.out.println("userNo:"+userNo);
+			// 当此账号 不存在-- 返回0    存在返回--1 否则返回error
+			if (userMapper.findByUserNo(userNo).size() <= 0) {
 				return "0";
 			} else {
+				//System.out.println("size:"+userMapper.findByUserNo(userNo).size());
 				return "1";
 			}
 
@@ -94,7 +102,7 @@ public class UserServiceImpl implements UserService {
 		try {
 
 			// 当此账号不存在时 返回0 存在则返回1 否则返回error
-			if (userMapper.findByUserCount(userCount).size() < 0) {
+			if (userMapper.findByUserCount(userCount).size() <= 0) {
 				return "0";
 			} else {
 				return "1";
@@ -112,7 +120,7 @@ public class UserServiceImpl implements UserService {
 	public String existByTelPhone(String telPhone) {
 		try {
 			// 当此账号不存在时 返回0 存在则返回1 否则返回error
-			if (userMapper.findByTelPhone(telPhone).size() < 0) {
+			if (userMapper.findByTelPhone(telPhone).size() <= 0) {
 				return "0";
 			} else {
 				return "1";
@@ -130,7 +138,7 @@ public class UserServiceImpl implements UserService {
 	public String existByEmail(String email) {
 		try {
 			// 当此账号不存在时 返回0 存在则返回1 否则返回error
-			if (userMapper.findByEmail(email).size() < 0) {
+			if (userMapper.findByEmail(email).size() <= 0) {
 				return "0";
 			} else {
 				return "1";

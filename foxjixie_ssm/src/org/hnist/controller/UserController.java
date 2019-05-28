@@ -43,7 +43,7 @@ public class UserController {
 	  */
 	 @RequestMapping("/register")
 	 public String register(@ModelAttribute User user,Model model,HttpSession session){
-		 return null;
+		 return userService.register(user, model, session);
 	 }
 	 
 	 /**
@@ -51,7 +51,7 @@ public class UserController {
 	  * @param userNo
 	  * @return
 	  */
-	 @RequestMapping(value="existByUserNo")
+	 @RequestMapping(value="/existByUserNo")
 	 @ResponseBody
 	 public String existByUserNo(@RequestParam("userNo")String userNo){
 		 return userService.existByUserNo(userNo);
@@ -62,7 +62,7 @@ public class UserController {
 	  * @param userCount
 	  * @return
 	  */
-	 @RequestMapping(value="existByUserCount",produces = "text/plain;charset=utf-8")
+	 @RequestMapping(value="/existByUserCount",produces = "text/plain;charset=utf-8")
 	 @ResponseBody
 	 public String existByUserCount(@RequestParam("userCount")String userCount){
 		 return userService.existByUserCount(userCount);
@@ -73,7 +73,7 @@ public class UserController {
 	  * @param telPhone
 	  * @return
 	  */
-	 @RequestMapping(value="existByTelPhone",produces = "text/plain;charset=utf-8")
+	 @RequestMapping(value="/existByTelPhone",produces = "text/plain;charset=utf-8")
 	 @ResponseBody
 	 public String existByTelPhone(@RequestParam("telPhone")String telPhone){
 		 return userService.existByTelPhone(telPhone);
@@ -84,7 +84,7 @@ public class UserController {
 	  * @param email
 	  * @return
 	  */
-	 @RequestMapping(value="existByEmail",produces = "text/plain;charset=utf-8")
+	 @RequestMapping(value="/existByEmail",produces = "text/plain;charset=utf-8")
 	 @ResponseBody
 	 public String existByEmail(@RequestParam("email")String email){
 		 return userService.existByEmail(email);
@@ -94,7 +94,7 @@ public class UserController {
 	  * 查找所有的学院-ajax(注册账号用)
 	  * @return
 	  */
-	 @RequestMapping(value="findAllCollege",produces = "text/plain;charset=utf-8")
+	 @RequestMapping(value="/findAllCollege",produces = "text/plain;charset=utf-8")
 	 @ResponseBody
 	 public String findAllCollege(){
 		 return userService.findAllCollege();
