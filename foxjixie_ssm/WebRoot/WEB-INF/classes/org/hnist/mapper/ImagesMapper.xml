@@ -5,11 +5,44 @@
 	
 	<!-- 查找最大的图片序号 -->
 	<select id="findMaxImageId" resultType="Integer">
-	
+		select Max(imgesId) from Images 
 	</select>
 
-	<!-- 将导入的图片路径插入数据库的方法 -->
-	<select id="insertImages" parameterType="Images" >
+	<!-- 将导入的图片导入数据库的方法 -->
+	<insert id="insertImages" parameterType="Images">
+		insert into Images(imgesId,img01,img02,img03,img04,img05,imgTime,imgStatus)
+					values(#{imgesId},#{img01},#{img02},#{img03},#{img04},#{img05},#{imgTime},'0')
+	</insert>
 	
+	<!-- 更改图片的显示状态 -->
+	<update id="changeImageStatus" parameterType="Integer">
+		update Images 
+			<set>
+				<if test="imgStatus!=null">
+					imgStatus=#{imgStatus}
+				</if>
+			</set>
+			
+			where imgesId=#{imgesId}
+	</update>
+	
+	<!-- 删除图片的方法 -->
+	<delete id="deleteImages" parameterType="Integer">
+		delete from Images where imgesId=#{imgesId}
+	</delete>
+	
+	<!-- 查找所有的图片 -->
+	<select id="findAllImage" resultType="Images">
+		select * from Images order by imgesId
+	</select>
+	
+	<!-- 查找正在显示的图片 -->
+	<select id="findAllShowImage" resultType="Images">
+		select * from Images where imgStatus='1'
+	</select>
+	
+	<!-- 通过图片序号查找图片 -->
+	<select id="findByImagesId" parameterType="Integer" resultType="Images">
+		select * from Images where imgesId=#{imgesId}
 	</select>
 </mapper>

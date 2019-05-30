@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
 
 				session.setAttribute("user", users.get(0));
 				
-				return "/index";
+				return "redirect:/front/Index.do";
 			}
 			model.addAttribute("msg", "账号或密码错误");
 			return "/login";

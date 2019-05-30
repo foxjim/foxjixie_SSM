@@ -15,8 +15,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 										
 									 <li id="menu-academico" ><a href="#"><i class="fa fa-list-ul" aria-hidden="true"></i><span>首页</span> <span class="fa fa-angle-right" style="float: right"></span><div class="clearfix"></div></a>
 										   <ul id="menu-academico-sub" >
-										    <li id="menu-academico-avaliacoes" ><a href="imagelist.jsp">图片轮播列表</a></li>
-											<li id="menu-academico-avaliacoes" ><a href="lb.jsp">添加轮播图片</a></li>
+										    <li id="menu-academico-avaliacoes" ><a href="queryAllPictures.do">图片轮播列表</a></li>
+											<li id="menu-academico-avaliacoes" ><a href="InsertImages.jsp">添加轮播图片</a></li>
 										  </ul>
 										</li>
 							

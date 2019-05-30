@@ -40,7 +40,7 @@
             			
 						<ul style="z-index:10;" class="nav-list">
 							<li>
-								<a href="index.jsp">首页</a>
+								<a href="./Index.do">首页</a>
 							</li>
 							<li>
 								<a href="NewsTest.jsp">新闻动态</a>

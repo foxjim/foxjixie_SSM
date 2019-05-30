@@ -24,6 +24,8 @@
 <!-- lined-icons -->
 <link rel="stylesheet" href="css/icon-font.min.css" type='text/css' />
 <!-- //lined-icons -->
+
+<script type="text/javascript" src="./js/InsertImages.js"></script>
 </head> 
 <body>
    <div class="page-container">
@@ -46,18 +48,24 @@
 					  <div class="form-group">
 					  
 					   <div class="col-md-12 form-group1 group-mail">
-             				<h2>请选择合适的图片进行上传<span style="font-size:15px;">(上传文件将强制转换为jpg格式文件,建议大小：1069 x 450 像素)</span></h2>
+					   		<%
+								String msg=request.getParameter("msg") ;
+								if(msg!=null){	
+							%>
+								<%=msg %>
+							<%} %>
+             				<h2>请选择合适的图片进行上传<span style="font-size:15px;">(上传文件支持jpg、png、gif,建议大小：1069 x 450 像素)</span></h2>
               								
             						</div>
              						<div class="clearfix"> </div>
              	
 					<form action="./InsertPictures.do" method="post" enctype="multipart/form-data">
 						
-						<input type="file" name="imge01"><br>
-						<input type="file" name="imge02"><br>
-						<input type="file" name="imge03"><br>
-						<input type="file" name="imge04"><br>
-						<input type="file" name="imge05"><br>
+						<input id="insertImage01" oninput="insertImages01()" type="file" name="imge01" required="required"><br>
+						<input id="insertImage02" oninput="insertImages02()" type="file" name="imge02" required="required"><br>
+						<input id="insertImage03" oninput="insertImages03()" type="file" name="imge03" required="required"><br>
+						<input id="insertImage04" oninput="insertImages04()" type="file" name="imge04" required="required"><br>
+						<input id="insertImage05" oninput="insertImages05()" type="file" name="imge05" required="required"><br>
 						
 						
 						<div class="col-md-12 form-group">

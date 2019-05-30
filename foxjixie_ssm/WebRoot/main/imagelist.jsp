@@ -24,6 +24,7 @@
 <link rel="stylesheet" type="text/css" href="css/table-style.css" />
 <link rel="stylesheet" type="text/css" href="css/basictable.css" />
 <script type="text/javascript" src="js/jquery.basictable.min.js"></script>
+<script type="text/javascript" src="./js/imagelist.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
       $('#table').basictable();
@@ -87,21 +88,31 @@
 						  </tr>
 						</thead>
 						<tbody>
-						<c:forEach var="ig" items="${imges }">
-						 <tr>
-						 	<td>${ig.iid}</td>
+						
+						<c:forEach var="ig" items="${imges }" varStatus="status">
+						 <tr id="${ig.imgesId}pic">
+						 	<td>${status.index + 1}</td>  
 						 	<td>${ig.imgTime}</td>
-						 	<c:if test="${ig.imgOk==0 }">
-						 	<td>未启用</td>
+						 	<c:if test="${ig.imgStatus==0 }">
+						 	<td id="${ig.imgesId}user">未启用</td>
 						 	</c:if>
-						 	<c:if test="${ig.imgOk==1 }">
-						 	<td>已启用</td>
+						 	<c:if test="${ig.imgStatus==1 }">
+						 	<td id="${ig.imgesId}user">已启用</td>
 						 	</c:if>
-						 	<td><a href="setupImages?param=${ig.iid}">设为启用</a>&nbsp;|&nbsp;<a href="deleteImages?param=${ig.iid}">删除</a></td>
+						 		<input id="${ig.imgesId}Status" type="hidden" value="${ig.imgStatus }"/>
+						 	<td>
+						 		<a href="javascript:void(0)" onclick="setIndexUser('${ig.imgesId}')">设为启用</a>&nbsp;|&nbsp;
+						 		<a href="javascript:void(0)" onclick="deleteImages('${ig.imgesId}')">删除</a>
+						 	</td>
 						 </tr>
 						 </c:forEach>
 						</tbody>
 					  </table>
+					  <c:if test="${empty imges }">
+								 <div class="clearfix"></div>	
+								<p style="color:red;margin-top:20px;margin-left:20px;">暂无数据，<a href="./InsertImages.jsp">点击上传图片</a></p>
+							
+						</c:if>
 					</div>
 			
 				 <br />

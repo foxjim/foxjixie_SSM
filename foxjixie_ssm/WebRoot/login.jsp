@@ -66,7 +66,7 @@
 									
 									<label
 										style="clear:both; float: right; color: #858585; margin-right: 40px; margin-top: 5px; font-size: 14px;">懒得注册？
-										<a href="./front/index.jsp">游客登录</a>
+										<a href="./front/Index.do">游客登录</a>
 									</label>
 								</div>
 							</fieldset>

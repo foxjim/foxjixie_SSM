@@ -25,26 +25,27 @@
 			<div class="slider_container">
 			
 				<div class="slide" style=" opacity: 1; z-index: 0; display: none;">
-					<img style="height:450px;width:100%;" id="img1" src="./img/img1.jpg">
+					<img style="height:450px;width:100%;" id="img1" src="${images.img01}">
 				</div>
 				<div class="slide" style="opacity: 1; z-index: 1; display: block;">
-					<img style="height:450px;width:100%;" id="img2" src="./img/img2.jpg">
+					<img style="height:450px;width:100%;" id="img2" src="${images.img02}">
 				</div>
 				<div class="slide" style="opacity: 1; z-index: 1; display: block;">
-					<img style="height:450px;width:100%;" id="img3" src="./img/img3.jpg">
+					<img style="height:450px;width:100%;" id="img3" src="${images.img03}">
 				</div>
 				<div class="slide" style=" opacity: 1;z-index: 0; display: none;">
-					<img style="height:450px;width:100%;" id="img4" src="./img/img4.jpg">
+					<img style="height:450px;width:100%;" id="img4" src="${images.img04}">
 				</div>
 				<div class="slide" style=" opacity: 1;z-index: 0; display: none;">
-					<img style="height:450px;width:100%;" id="img5" src="./img/img5.jpg">
+					<img style="height:450px;width:100%;" id="img5" src="${images.img05}">
 				</div>
 			
 			</div>
 		<div class="cssmenu">
 						<ul>
 							<li>
-								<a href="Index">首页</a>
+								
+								<a href="./Index.do">首页</a>
 							</li>
 							<li>
 								<a href="NewsTest.jsp">新闻动态</a>
@@ -58,10 +59,6 @@
 							<li>
 								<a href="content.jsp">社团资源</a>
 							</li>
-							<li>
-								您好！<%=session.getAttribute("userCount") %>
-							</li>
-							
 							<li class="last">
 								<a href="contact.jsp">关于我们</a>
 							</li>
@@ -80,7 +77,7 @@
 <!-- start main-->
 		<div class="main_bg">
 			<div class="business">
-				${msg }技术领域 TECHNOlOGY 
+				技术领域 TECHNOlOGY
 			</div>
 			<div class="wrap w_72">
 				<div class="grids_1_of_3">

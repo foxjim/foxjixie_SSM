@@ -3,6 +3,7 @@ package org.hnist.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.hnist.model.Images;
 import org.springframework.stereotype.Repository;
 
@@ -22,7 +23,7 @@ public interface ImagesMapper {
 	public Integer findMaxImageId();
 	
 	/**
-	 * 将导入的图片路径插入数据库的方法
+	 * 将导入的图片导入数据库的方法
 	 * @param imges
 	 * @return
 	 */
@@ -33,7 +34,7 @@ public interface ImagesMapper {
 	 * @param imgStatus
 	 * @return
 	 */
-	public boolean changeImageStatus(Integer imgStatus);
+	public boolean changeImageStatus(@Param("imgesId")Integer imgesId,@Param("imgStatus")Integer imgStatus);
 	
 	/**
 	 * 删除图片的方法
@@ -47,4 +48,17 @@ public interface ImagesMapper {
 	 * @return
 	 */
 	public List<Images> findAllImage();
+	
+	/**
+	 * 查找正在显示的图片
+	 * @return
+	 */
+	public List<Images> findAllShowImage();
+	
+	/**
+	 * 	通过图片序号查找图片
+	 * @param imgesId
+	 * @return
+	 */
+	public Images findByImagesId(Integer imgesId);
 }

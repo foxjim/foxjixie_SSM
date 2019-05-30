@@ -38,7 +38,7 @@ public class IndexController {
 	 */
 	@RequestMapping("/main/queryAllPictures")
 	public String queryAllImage(Model model,HttpSession session){
-		return null;
+		return indexService.showAllImages(model, session);
 	}
 	
 	/**
@@ -66,9 +66,11 @@ public class IndexController {
 		try{
 			//获取系统路径
 			String path=req.getSession().getServletContext().getRealPath("/");
+			path=path.replace("foxjixie_ssm", "");
+			path=path.substring(0, path.length()-1);
 			//获取时间
 			Date date=new Date();
-			SimpleDateFormat sdf = new SimpleDateFormat ("hhmmss");
+			SimpleDateFormat sdf = new SimpleDateFormat ("HHmmss");
 			sdf.format(date);
 			
 			//保存文件名-总
@@ -76,16 +78,24 @@ public class IndexController {
 			
 			
 			//保存的路径
-			String filepath=path+File.separator+
+			String filepath=path+
 							"upload"+File.separator+
 							(date.getYear()+1)+ File.separator+
 							(date.getMonth()+1)+File.separator+
-							(date.getDate()+1)+File.separator;
+							(date.getDate())+File.separator;
 			
+			//图片在页面显示的相对路径
+			String imageUrl=filepath.replace(path, "../../../");
+			SimpleDateFormat sdfimage = new SimpleDateFormat ("yyyy-MM-dd HH:MM");
+			//System.out.println("path:"+filepath);
 			//初始化Images对象
 			Images images=new Images();
-			images.setImg01(filepath+totalFileName+imgeFile.getImge01().getOriginalFilename());
-			
+			images.setImg01(imageUrl+"01"+totalFileName+imgeFile.getImge01().getOriginalFilename());
+			images.setImg02(imageUrl+"02"+totalFileName+imgeFile.getImge02().getOriginalFilename());
+			images.setImg03(imageUrl+"03"+totalFileName+imgeFile.getImge03().getOriginalFilename());
+			images.setImg04(imageUrl+"04"+totalFileName+imgeFile.getImge04().getOriginalFilename());
+			images.setImg05(imageUrl+"05"+totalFileName+imgeFile.getImge05().getOriginalFilename());
+			images.setImgTime(sdfimage.format(date));
 			//逐个保存文件
 			File file01=new File(filepath,"01"+totalFileName+imgeFile.getImge01().getOriginalFilename());
 			if(!file01.exists() ){
@@ -113,13 +123,51 @@ public class IndexController {
 				imgeFile.getImge05().transferTo(file05);
 			}
 			
+			return indexService.InsertImages(path,images, model, session);
+			
 		}catch(Exception e){
 			e.printStackTrace();
 		}
 		
-		
-		return null;
+		model.addAttribute("msg", "文件保存失败 请稍后重试");
+		return "redirect:/main/InsertImages.jsp";
 	}
 	
+	/**
+	 * 首页显示图片
+	 * @param model
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping("/front/Index")
+	public String Index(Model model,HttpSession session){
+		return indexService.showIndexImages(model, session);
+	}
 	
+	/**
+	 * 更改首页显示的图片
+	 * @param imgesId
+	 * @return
+	 */
+	@RequestMapping("/main/setImageStatus")
+	@ResponseBody
+	public String setImageStatus(@RequestParam("imgesId")Integer imgesId){
+		return indexService.changeImagesStatus(imgesId);
+	}
+	
+	/**
+	 * 删除图片的方法
+	 * @param imgesId
+	 * @return
+	 */
+	@RequestMapping("/main/deleteImages")
+	@ResponseBody
+	public String deleteImages(@RequestParam("imgesId")Integer imgesId,HttpServletRequest request){
+		//获取系统路径
+		String path=request.getSession().getServletContext().getRealPath("/");
+		path=path.replace("foxjixie_ssm", "");
+		path=path.substring(0, path.length()-1);
+		
+		return indexService.deleteImages(path,imgesId);
+	}
 }
