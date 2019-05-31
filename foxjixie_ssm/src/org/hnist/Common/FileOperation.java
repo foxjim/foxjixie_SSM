@@ -2,8 +2,6 @@ package org.hnist.Common;
 
 import java.io.File;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.hnist.model.Images;
 /**
  * 文件操作的方法
@@ -34,14 +32,14 @@ public class FileOperation {
 	 * @param path		图片路径
 	 * @param images	images对象
 	 */
-	public void deleteImagesFile(String path,Images images){
+	public void deleteImagesFile(String oldString,String NewString,Images images){
 		
 		//字符串转换
-		this.deleteFile(images.getImg01().replace("../../../", path));
-		this.deleteFile(images.getImg02().replace("../../../", path));
-		this.deleteFile(images.getImg03().replace("../../../", path));
-		this.deleteFile(images.getImg04().replace("../../../", path));
-		this.deleteFile(images.getImg05().replace("../../../", path));
+		this.deleteFile(images.getImg01().replace(oldString, NewString));
+		this.deleteFile(images.getImg02().replace(oldString, NewString));
+		this.deleteFile(images.getImg03().replace(oldString, NewString));
+		this.deleteFile(images.getImg04().replace(oldString, NewString));
+		this.deleteFile(images.getImg05().replace(oldString, NewString));
 	}
 	
 	/** 

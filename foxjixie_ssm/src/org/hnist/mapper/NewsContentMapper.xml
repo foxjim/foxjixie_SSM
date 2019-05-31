@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- org.hnist.mapper.TeacherMapper对应的接口 -->
+<mapper namespace="org.hnist.mapper.NewsContentMapper">
+	
+	<!-- 查找最大的ncId -->
+	<select id="findMaxNcId" resultType="Integer">
+		select Max(ncId) from NewsContent 
+	</select>
+	
+	<!-- 插入数据的方法 -->
+	<insert id="insertNewsCount" parameterType="NewsContent">
+		insert into NewsContent(ncId,nhid,ncContent)
+					values(#{ncId},#{nhid},#{ncContent})
+	</insert>
+	
+	<!-- 更新数据的方法 -->
+	<update id="updateNewsContent" parameterType="NewsContent">
+		update NewsContent 
+			<set>
+				<if test="ncContent!=null and ncContent!=''">
+					ncContent=#{ncContent}
+				</if>
+			</set>				
+			 where ncId=#{ncId}
+	</update>
+	
+	<!-- 删除新闻的方法 -->
+	<delete id="deleteNewsContent" parameterType="Integer">
+		delete from NewsContent where ncId=#{ncId}
+	</delete>
+	
+	<!-- 通过序号查找新闻内容 -->
+	<select id="findByNcId" parameterType="Integer" resultType="NewsContent">
+		select * from NewsContent where ncId=#{ncId}
+	</select>
+	
+	<!-- 通过新闻标题查找序号 -->
+	<select id="findByNhId" parameterType="Integer" resultType="NewsContent">
+		select * from NewsContent where nhId=#{nhId}
+	</select>
+</mapper>

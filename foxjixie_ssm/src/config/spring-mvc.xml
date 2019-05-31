@@ -14,6 +14,11 @@
     <!-- 注解扫描包,使SpringMVC认为包下用了@controller注解的类是控制器 -->
     <context:component-scan base-package="org.hnist.controller" />
 
+
+	<!--静态资源拦截问题  -->
+    <mvc:resources location="/utf8-jsp/" mapping="/utf8-jsp/**"/>
+    
+    
     <!-- 开启注解 -->
     <mvc:annotation-driven />
 

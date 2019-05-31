@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- org.hnist.mapper.TeacherMapper对应的接口 -->
+<mapper namespace="org.hnist.mapper.NewsHeadMapper">
+	
+	<!-- 查找最大的新闻序号 -->
+	<select id="findMaxNhId" resultType="Integer">
+		select Max(nhId) from NewsHead 
+	</select>
+	
+	<!--  插入新闻 -->
+	<insert id="insertNewsHead" parameterType="NewsHead">
+		insert into NewsHead(nhId,nhClass,nhTitle,nhTime,nhPerson,otherLink,ownLink,userLink)
+					values(#{nhId},#{nhClass},#{nhTitle},#{nhTime},#{nhPerson},#{otherLink},#{ownLink},#{userLink})
+	</insert>
+	
+	<!--  更新新闻的操作 -->
+	<update id="updateNewsHead" parameterType="NewsHead">
+		update NewsHead
+			<set>
+				<if test="nhClass!=null and nhClass!=''">
+					nhClass=#{nhClass},
+				</if>
+				<if test="nhTitle!=null and nhTitle!=''">
+					nhTitle=#{nhTitle},
+				</if>
+				<if test="nhTime!=null and nhTime!=''">
+					nhTime=#{nhTime},
+				</if>
+				<if test="nhPerson!=null and nhPerson!=''">
+					nhPerson=#{nhPerson},
+				</if>
+				<if test="otherLink!=null and otherLink!=''">
+					otherLink=#{otherLink},
+				</if>
+				<if test="nhClass!=null and nhClass!=''">
+					userLink=#{userLink}
+				</if>
+			</set>
+			where nhId=#{nhId}
+	</update>
+	
+	<!-- 插入内部新闻 -->
+	<update id="insertOwnLink" parameterType="Integer">
+		update NewsHead
+		<set>
+			ownLink='0'
+		</set>
+		where nhId=#{nhId}
+	</update>
+	
+	<!-- 删除新闻的操作 -->
+	<delete id="deleteNewsHead" parameterType="Integer">
+		delete from NewsHead where nhId=#{nhId}
+	</delete>
+	
+	<!-- 查找所有的新闻 -->
+	<select id="findAllNewsHead" resultType="NewsHead">
+		select * from NewsHead order by nhId
+	</select>
+	
+	<!-- 通过限制条件查找新闻 -->
+	<select id="findLimitNewsHead" resultType="NewsHead" parameterType="Integer">
+		select * from NewsHead limit #{begin},#{end}
+	</select>
+	
+	<!-- 查询所有的数据量 -->
+	<select id="findTotalCount" resultType="Integer">
+		select count(*) from test
+	</select>
+</mapper>

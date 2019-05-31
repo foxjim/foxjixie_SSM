@@ -18,12 +18,11 @@
 <link href="css/font-awesome.css" rel="stylesheet"> 
 <!-- jQuery -->
 <script src="js/jquery-2.1.4.min.js"></script>
-<!-- //jQuery -->
-<link href='http://fonts.googleapis.com/css?family=Roboto:700,500,300,100italic,100,400' rel='stylesheet' type='text/css'/>
-<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-<!-- lined-icons -->
+
 <link rel="stylesheet" href="css/icon-font.min.css" type='text/css' />
 <!-- //lined-icons -->
+
+<script type="text/javascript" src="./js/news.js"></script>
 </head> 
 <body>
    <div class="page-container">
@@ -42,29 +41,32 @@
  		<div class="validation-form">
  
   	   
-        <form action="insertNewsHead" method="post">
+        <form action="InsertNews.jsp" method="post" onsubmit="return ensureNewsHead()">
         
         	<div class="col-md-12 form-group1 group-mail">
-              <label class="control-label">标题</label>
-              <input type="text" placeholder="标题" required="required" name="nhTitle" >
+              <label class="control-label">标题 <span id="nhTitle_show" style="color:red; font-size:15px;font-weight:200;"></span></label>
+              <input type="text" placeholder="标题" required="required" name="nhTitle" id="nhTitle" oninput="ensureNhTitle()" >
+             
             </div>
              <div class="clearfix"> </div>
              
+             <!-- 
             <div class="col-md-12 form-group1 group-mail">
-              <label class="control-label">时间</label>
-              <input type="text" placeholder="示例：2018/01/01" required="required" name="nhTime" >
+              <label class="control-label">撰写时间</label>
+              <input type="date" placeholder="示例：2018/01/01" required="required" name="nhTime"  id="" oninput="">
             </div>
              <div class="clearfix"> </div>
-             
+              -->
+              
               <div class="col-md-12 form-group1 group-mail">
-              <label class="control-label">发布人</label>
-              <input type="text" placeholder="发布人" required="required" name="nhPerson" >
+              <label class="control-label">发布人<span id="nhPerson_show" style="color:red; font-size:15px;font-weight:200;"></span></label>
+              <input type="text" placeholder="发布人" required="required" name="nhPerson" id="nhPerson" oninput="ensureNhPerson()" >
             </div>
              <div class="clearfix"> </div>
              
                <div class="col-md-12 form-group1 group-mail">
-              <label class="control-label">其他链接</label>
-              <input type="text" placeholder="外部链接" name="otherLink" >
+              <label class="control-label"><input type="checkbox" id="userOther" oninput="ensureUserOther()">使用外部链接<span id="otherLink_show" style="color:red;font-family:楷体; font-size:15px;font-weight:200;"></span></label>
+              <input type="text" placeholder="若需使用外部链接请勾选上方选框" name="otherLink" id="otherLink" oninput="ensureOtherLink()" readonly="readonly">
            		 </div>
              	<div class="clearfix"> </div>
              
@@ -84,22 +86,7 @@
 </div>
  	<!--//grid-->
 
-<!-- script-for sticky-nav -->
-		<script>
-		$(document).ready(function() {
-			 var navoffeset=$(".header-main").offset().top;
-			 $(window).scroll(function(){
-				var scrollpos=$(window).scrollTop(); 
-				if(scrollpos >=navoffeset){
-					$(".header-main").addClass("fixed");
-				}else{
-					$(".header-main").removeClass("fixed");
-				}
-			 });
-			 
-		});
-		</script>
-		<!-- /script-for sticky-nav -->
+
 <!--inner block start here-->
 <div class="inner-block">
 

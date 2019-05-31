@@ -44,7 +44,7 @@ public class IndexServiceImpl implements IndexService{
 				
 				//删除图片
 				FileOperation fileOperation=new FileOperation();
-				fileOperation.deleteImagesFile(path,images);
+				fileOperation.deleteImagesFile("../../../",path,images);
 				
 				
 				model.addAttribute("msg", "导入失败 请稍后重试");
@@ -101,7 +101,7 @@ public class IndexServiceImpl implements IndexService{
 				
 				//删除文件
 				FileOperation fileOperation=new FileOperation();
-				fileOperation.deleteImagesFile(path,images);
+				fileOperation.deleteImagesFile("../../../",path,images);
 				
 				return "ok";
 			}else{

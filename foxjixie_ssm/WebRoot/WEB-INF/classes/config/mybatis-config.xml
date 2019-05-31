@@ -6,10 +6,17 @@
         <typeAlias alias="User" type="org.hnist.model.User"/>
         <typeAlias alias="College" type="org.hnist.model.College"/>
         <typeAlias alias="Images" type="org.hnist.model.Images"/>
+        <typeAlias alias="NewsHead" type="org.hnist.model.NewsHead"/>
+        <typeAlias alias="NewsContent" type="org.hnist.model.NewsContent"/>
+        <typeAlias alias="AdminUser" type="org.hnist.model.AdminUser"/>
+        
     </typeAliases>
     <mappers>
         <mapper resource="org/hnist/mapper/UserMapper.xml" />
         <mapper resource="org/hnist/mapper/CollegeMapper.xml" />
         <mapper resource="org/hnist/mapper/ImagesMapper.xml" />
+        <mapper resource="org/hnist/mapper/NewsHeadMapper.xml" />
+        <mapper resource="org/hnist/mapper/NewsContentMapper.xml" />
+        <mapper resource="org/hnist/mapper/AdminUserMapper.xml" />
     </mappers>
 </configuration>

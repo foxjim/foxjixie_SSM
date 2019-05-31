@@ -26,9 +26,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!-- jQuery -->
 <script src="./main/js/jquery-2.1.4.min.js"></script>
 <!-- //jQuery -->
-<link href='http://fonts.googleapis.com/css?family=Roboto:700,500,300,100italic,100,400' rel='stylesheet' type='text/css'/>
-<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-<!-- lined-icons -->
+
 <link rel="stylesheet" href="./main/css/icon-font.min.css" type='text/css' />
 <!-- //lined-icons -->
 </head> 
