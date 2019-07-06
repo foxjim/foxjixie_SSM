@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- org.hnist.mapper.Culture对应的接口 -->
+<mapper namespace="org.hnist.mapper.CultureMapper">
+	
+	<!-- 查找最大的文化序号 -->
+	<select id="findMaxCultureId" resultType="Integer">
+		select Max(cultureId) from Culture
+	</select>
+	
+	<!-- 	插入社团文化的方法 -->
+	<insert id="insertCulture" parameterType="Culture">
+		insert into Culture(cultureId,cultureGrade,cultureClass,cultureTime,cultureContent,cultureLink)
+					values(#{cultureId},#{cultureGrade},#{cultureClass},#{cultureTime},#{cultureContent},#{cultureLink})
+	</insert>
+	
+	<!-- 删除社团文化的方法 -->
+	<delete id="deleteCultureById" parameterType="Integer">
+		delete from Culture where cultureId=#{cultureId}
+	</delete>
+	
+	<!-- 通过文化序号查找社团文化 -->
+	<select id="findByCultureId" parameterType="Integer" resultType="Culture">
+		select * from Culture where cultureId=#{cultureId}
+	</select>
+	
+	<!-- 编辑社团文化的方法 -->
+	<update id="editorCulture" parameterType="Culture">
+		update Culture
+			<set>
+				<if test="cultureGrade!=null and cultureGrade!='' ">
+					cultureGrade=#{cultureGrade},
+				</if>
+				<if test="cultureClass!=null and cultureClass!='' ">
+					cultureClass=#{cultureClass},
+				</if>
+				<if test="cultureTime!=null and cultureTime!='' ">
+					cultureTime=#{cultureTime},
+				</if>
+				<if test="cultureContent!=null and cultureContent!='' ">
+					cultureContent=#{cultureContent},
+				</if>
+				<if test="cultureLink!=null">
+					cultureLink=#{cultureLink},
+				</if>
+				
+				
+			
+			</set>
+			where cultureId=#{cultureId}
+	</update>
+	
+	<!-- 通过任届（年级号）查找社团文化 -->
+	<select id="findByCultureGrade" parameterType="String" resultType="Culture">
+		select * from Culture where cultureGrade=#{cultureGrade}
+	</select>
+	
+	<!--查找所有的社团文化类型  -->
+	<select id="findAllCultureClass" resultType="String">
+		select cultureClass from Culture group by cultureClass
+	</select>
+	
+	<!--通过类型查找社团文化的方法  -->
+	<select id="findByCultureClass" parameterType="String" resultType="Culture">
+		select * from Culture where cultureClass=#{cultureClass} 
+	</select>
+	
+	<!--通过类型查找社团文化的方法  -->
+	<select id="findByCultureClassGrade" parameterType="String" resultType="Culture">
+		select * from Culture where cultureClass=#{cultureClass} and cultureGrade=#{cultureGrade}
+	</select>
+</mapper>

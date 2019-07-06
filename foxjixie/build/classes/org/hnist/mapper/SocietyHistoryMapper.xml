@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- org.hnist.mapper.TeacherMapper对应的接口 -->
+<mapper namespace="org.hnist.mapper.SocietyHistoryMapper">
+
+	<!-- 查找最大的序号 -->
+	<select id="findMaxId" resultType="Integer">
+		select societyHistoryId from SocietyHistory group by societyHistoryId
+	</select>
+	
+	<!-- 插入社团历史的方法 -->
+	<insert id="insertSocietyHistory" parameterType="SocietyHistory">
+		insert into SocietyHistory(societyHistoryId,societyHistoryTime,societyHistoryContent)
+					values(#{societyHistoryId},#{societyHistoryTime},#{societyHistoryContent})
+	</insert>
+	
+	<!-- 删除社团历史的方法 -->
+	<delete id="deleteSocietyHistory" parameterType="Integer">
+		delete from SocietyHistory where societyHistoryId=#{societyHistoryId}
+	</delete>
+	
+	<!-- 更新社团历史的方法 -->
+	<update id="updateSocietyHistory" parameterType="SocietyHistory">
+		update SocietyHistory
+			<set>
+				<if test="societyHistoryTime!=null and societyHistoryTime!=''">
+					societyHistoryTime=#{societyHistoryTime},
+				</if>
+				<if test="societyHistoryContent!=null and societyHistoryContent!='' ">
+					societyHistoryContent=#{societyHistoryContent}
+				</if>
+				where societyHistoryId=#{societyHistoryId}
+			</set>
+	</update>
+	
+	<!-- 通过Id号查找社团历史的方法 -->
+	<select id="findBySocietyHistoryId" parameterType="Integer" resultType="SocietyHistory">
+		select * from SocietyHistory where societyHistoryId=#{societyHistoryId}
+	</select>
+	
+	<!-- 查找所有的社团历史  -->
+	<select id="findAllSocietyHistory" resultType="SocietyHistory">
+		select * from SocietyHistory order by societyHistoryId
+	</select>
+</mapper>

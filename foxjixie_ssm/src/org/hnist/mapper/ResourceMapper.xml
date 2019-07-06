@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- org.hnist.mapper.TeacherMapper对应的接口 -->
+<mapper namespace="org.hnist.mapper.ResourceMapper">
+	
+	<!-- 查找最大的序号 -->
+	<select id="findMaxResourceId" resultType="Integer">
+		select Max(ResourceId) from Resource order by resourceId
+	</select>
+	
+	<!-- 添加社团资源的方法 -->
+	<insert id="insertResource" parameterType="Resource">
+		insert into Resource(resourceId,resourceClass,resourceName,resourceLink,resourcePassword)
+					values(#{resourceId},#{resourceClass},#{resourceName},#{resourceLink},#{resourcePassword})
+	</insert>
+	
+	<!-- 根据序号删除社团资源的方法 -->
+	<delete id="deleteByResourceId" parameterType="Integer">
+		delete from Resource where resourceId=#{resourceId}
+	</delete>
+	
+	<!-- 通过序号查找资源 -->
+	<select id="findByResourceId" parameterType="Integer" resultType="Resource">
+		select * from Resource where resourceId=#{resourceId}
+	</select>
+	
+	<!-- 更新社团资源的方法 -->
+	<update id="updateResource" parameterType="Resource">
+		update Resource
+			<set>
+				<if test="resourceClass != null and resourceClass!='' ">
+					resourceClass=#{resourceClass},
+				</if>
+				<if test="resourceName != null and resourceName!='' ">
+					resourceName=#{resourceName},
+				</if>
+				<if test="resourceLink != null and resourceLink !='' ">
+					resourceLink=#{resourceLink},
+				</if>
+				<if test="resourcePassword != null ">
+					resourcePassword=#{resourcePassword}
+				</if>
+			</set>
+			
+			where resourceId=#{resourceId}
+	</update>
+	
+	<!-- 查找所有的资源类型 -->
+	<select id="findAllResourceClass"  resultType="String">
+		select resourceClass from Resource group by resourceClass
+	</select>
+	
+	<!-- 根据资源类型查找所有的资源 -->
+	<select id="findByResourceClass" parameterType="String" resultType="Resource">
+		select * from Resource where resourceClass=#{resourceClass}
+	</select>
+</mapper>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- org.hnist.mapper.TeacherMapper对应的接口 -->
+<mapper namespace="org.hnist.mapper.SocietyNumberMapper">
+
+	<!-- 查找最大的序号Id -->
+	<select id="findMaxId" resultType="Integer">
+		select Max(societyNumberId) from SocietyNumber
+	</select>
+	
+	<!-- 添加社团历史的方法 -->
+	<insert id="insertSocietyNumber" parameterType="SocietyNumber">
+		insert into SocietyNumber(societyNumberId,societyNumberTerm,societyNumberDepartment,societyNumberOldMember,societyNumberYoungerMember)
+					values(#{societyNumberId},#{societyNumberTerm},#{societyNumberDepartment},#{societyNumberOldMember},#{societyNumberYoungerMember})
+	</insert>
+	
+	<!-- 删除社团成员的方法 -->
+	<delete id="deleteSocietyNumber" parameterType="Integer">
+		delete from societyNumber where societyNumberId=#{societyNumberId}
+	</delete>
+	
+	<!--通过Id查找社团成员的方法  -->
+	<select id="findSocietyNumberById" parameterType="Integer" resultType="SocietyNumber">
+		select * from SocietyNumber where societyNumberId=#{societyNumberId}
+	</select>
+	
+	<!-- 更新社团成员的方法 -->
+	<update id="updateSocietyNumber" parameterType="SocietyNumber">
+		update SocietyNumber
+			<set>
+				<if test=" societyNumberId !=null and societyNumberId !='' ">
+					societyNumberId=#{societyNumberId},
+				</if>
+				
+				<if test=" societyNumberTerm !=null and societyNumberTerm !='' ">
+					societyNumberTerm=#{societyNumberTerm},
+				</if>
+				
+				<if test=" societyNumberDepartment !=null and societyNumberDepartment !='' ">
+					societyNumberDepartment=#{societyNumberDepartment},
+				</if>
+				
+				<if test=" societyNumberOldMember !=null and societyNumberOldMember !='' ">
+					societyNumberOldMember=#{societyNumberOldMember},
+				</if>
+				
+				<if test=" societyNumberYoungerMember !=null and societyNumberYoungerMember !='' ">
+					societyNumberYoungerMember=#{societyNumberYoungerMember}
+				</if>
+				
+				<if test="societyNumberYoungerMember ==null or societyNumberYoungerMember ==''">
+					societyNumberYoungerMember=''
+				</if>
+				
+				where societyNumberId=#{societyNumberId}
+				
+			
+			</set>
+	</update>
+	
+	<!-- 查找所有的数据  -->
+	<select id="findAllSocietyNumber" resultType="SocietyNumber">
+		select * from SocietyNumber order by societyNumberId
+	</select>
+	
+	<!-- 查找所有的任届  -->
+	<select id="findAllSocietyNumberTerm" resultType="String">
+		select DISTINCT societyNumberTerm from SocietyNumber order By societyNumberId
+	</select>
+	
+	<!-- 通过任届查找社团成员的方法 -->
+	<select id="findBySocietyNumberTerm" parameterType="String" resultType="SocietyNumber">
+		select * from SocietyNumber where societyNumberTerm=#{societyNumberTerm}
+	</select>
+	
+	
+	
+	
+</mapper>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- org.hnist.mapper.TeacherMapper对应的接口 -->
+<mapper namespace="org.hnist.mapper.ContactInformationMapper">
+
+
+	<!-- 查找最大的序号 -->
+	<select id="findMaxId" resultType="Integer">
+		select Max(contactInformationId) from ContactInformation 
+	</select>
+	
+	<!-- 添加社团联系方式的方法 -->
+	<insert id="InsertContactInformation" parameterType="ContactInformation">
+		insert into ContactInformation(contactInformationId,contactInformationName,contactInformationContant)
+					values(#{contactInformationId},#{contactInformationName},#{contactInformationContant})
+	</insert>
+	
+	<!-- 删除社团联系方式的方法 -->
+	<delete id="deleteContactInformation" parameterType="Integer">
+		delete from ContactInformation where contactInformationId=#{contactInformationId}
+	</delete>
+	
+	<!-- 根据序号查找contactInformation -->
+	<select id="findBycontactInformationId" parameterType="Integer" resultType="ContactInformation">
+		select * from ContactInformation where contactInformationId=#{contactInformationId}
+	</select>
+	
+	<!-- 更新社团联系方式的方法 -->
+	<update id="updateContactInformation" parameterType="ContactInformation">
+		update ContactInformation
+			<set>
+				<if test="contactInformationName !=null and contactInformationName !=''">
+						contactInformationName=#{contactInformationName},
+				</if>
+				<if test="contactInformationContant !=null and contactInformationContant !=''">
+						contactInformationContant=#{contactInformationContant}
+				</if>
+			</set>
+			where contactInformationId=#{contactInformationId}
+	</update>
+	
+	<!-- 查找所有的社团联系方式的方法 -->
+	<select id="findAllContactInformation" resultType="ContactInformation">
+		select * from ContactInformation order by contactInformationId
+	</select>
+	
+	
+	
+</mapper>
